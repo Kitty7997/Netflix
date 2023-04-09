@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "echo \"No build specified\" && exit 1",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
@@ -23,5 +24,13 @@
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0"
-  }
+  },
+  "repository": {
+            "type": "git",
+            "url": "git+https://github.com/Kitty7997/Netflix.git"
+        },
+        "bugs": {
+            "url": "https://github.com/Kitty7997/Netflix/issues"
+       },
+        "homepage": "https://github.com/Kitty7997/Netflix#readme"
 }
