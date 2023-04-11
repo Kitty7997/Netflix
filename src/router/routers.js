@@ -59,7 +59,7 @@ routers.post('/signup', async (req, res) => {
     const existingUser = await SignupUser.findOne({ email: email });
     try {
         if (existingUser) {
-            alert('User already exist')
+            res.json('User already exist')
         } else {
 
             if (password == cpassword) {
