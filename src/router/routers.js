@@ -4,61 +4,61 @@ const routers = express.Router();
 const SignupUser = require('../models/Signup');
 const bcrypt = require('bcryptjs');
 const Login = require('../models/Login')
-const session = require('express-session');
-const passport = require('passport')
+// const session = require('express-session');
+// const passport = require('passport')
 const jwt = require('jsonwebtoken');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const LocalStrategy = require("passport-local");
+// const GoogleStrategy = require('passport-google-oauth20').Strategy;
+// const LocalStrategy = require("passport-local");
 
 
-routers.use(session({
-    secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false
-}));
+// routers.use(session({
+//     secret: process.env.SECRET_KEY,
+//     resave: false,
+//     saveUninitialized: false
+// }));
 
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'http://localhost:1010/auth/google/callback',
-    scope: ['profile', 'email']
-}, (accessToken, refreshToken, profile, cb) => {
-    cb(null, profile)
-}
-));
+// passport.use(new GoogleStrategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRET,
+//     callbackURL: 'http://localhost:1010/auth/google/callback',
+//     scope: ['profile', 'email']
+// }, (accessToken, refreshToken, profile, cb) => {
+//     cb(null, profile)
+// }
+// ));
 
-routers.get('/auth/google',
-    passport.authenticate('google', { scope: ['profile', 'email'] }));
+// routers.get('/auth/google',
+//     passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-routers.get('/auth/google/callback',
-    passport.authenticate('google',
-        { failureRedirect: '/login' }),
-    function (req, res) {
-        // res.status(201).json({ message: 'exist' })
-        res.redirect('http://localhost:3000');
-    }
-);
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
+// routers.get('/auth/google/callback',
+//     passport.authenticate('google',
+//         { failureRedirect: '/login' }),
+//     function (req, res) {
+//         // res.status(201).json({ message: 'exist' })
+//         res.redirect('http://localhost:3000');
+//     }
+// );
+// passport.serializeUser(function (user, done) {
+//     done(null, user);
+// });
 
-passport.deserializeUser(function (user, done) {
-    done(null, user);
-});
+// passport.deserializeUser(function (user, done) {
+//     done(null, user);
+// });
 
-routers.get('/auth/logout', (req, res) => {
-    console.log('Logout successfully');
-    req.logout();
-    res.redirect('/');
-});
+// routers.get('/auth/logout', (req, res) => {
+//     console.log('Logout successfully');
+//     req.logout();
+//     res.redirect('/');
+// });
 
 routers.post('/signup', async (req, res) => {
     const { email, password, cpassword, phone } = req.body;
     const existingUser = await SignupUser.findOne({ email: email });
     try {
         if (existingUser) {
-            res.json('User already exist')
+            alert('User already exist')
         } else {
 
             if (password == cpassword) {

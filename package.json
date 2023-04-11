@@ -11,6 +11,7 @@
   "author": "Tejender",
   "license": "ISC",
   "dependencies": {
+    "alert": "^5.1.4",
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0",
     "cookies": "^0.8.0",
