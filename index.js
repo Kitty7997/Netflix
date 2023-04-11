@@ -1,6 +1,6 @@
 const express = require('express');
 const dot = require('dotenv')
-dot.config({ path: './backend/.env' })
+dot.config({ path: './backend/.env' }).parsed
 const app = express();
 const cors = require('cors')
 const db = require('./src/db/db')
