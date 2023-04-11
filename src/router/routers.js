@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const routers = express.Router();
 const SignupUser = require('../models/Signup');
-const alert = require('alert');
 const bcrypt = require('bcryptjs');
 const Login = require('../models/Login')
 const session = require('express-session');
