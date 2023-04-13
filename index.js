@@ -8,7 +8,7 @@ const port = process.env.PORT || 1010;
 const routers = require('./src/router/routers');
 const alert = require('alert')
 // const cookiesession = require('cookie-session');
-// const passport = require('passport')
+const passport = require('passport')
 // const session = require('express-session');
 
 
@@ -19,8 +19,8 @@ app.use('', routers);
 
 
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/', (req, res) => res.send('Hello Kitty! I am live now'))
 app.listen(port, () => console.log(`App listening on port ${port}!`))

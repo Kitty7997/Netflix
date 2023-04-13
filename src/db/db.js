@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const dot = require('dotenv')
-dot.config({ path: './backend/.env' }).parsed
 
 // Check if MONGODB_URI environment variable is defined and has a valid value
 if (!process.env.MONGODB_URI) {
