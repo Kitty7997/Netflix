@@ -4,6 +4,7 @@ const routers = express.Router();
 const SignupUser = require('../models/Signup');
 const bcrypt = require('bcryptjs');
 const Login = require('../models/Login')
+const alert = require('alert')
 const session = require('express-session');
 // const passport = require('passport')
 // const db = require('../db/db')
@@ -74,7 +75,7 @@ routers.post('/signup', async (req, res) => {
     const existingUser = await SignupUser.findOne({ email: email });
     try {
         if (existingUser) {
-            alert('User already exist')
+            res.status(409).json('User already exist')
         } else {
 
             if (password == cpassword) {
@@ -85,10 +86,10 @@ routers.post('/signup', async (req, res) => {
                     phone: phone
                 });
                 const token = await UserData.generateAuthToken();
-                res.cookie('netflix', token, {
-                    expires: new Date(Date.now() + 600000),
-                    httpOnly: true
-                })
+                // res.cookie('netflix', token, {
+                //     expires: new Date(Date.now() + 600000),
+                //     httpOnly: true
+                // })
                 await UserData.save();
                 res.status(201).json({ message: 'exist' })
             } else {

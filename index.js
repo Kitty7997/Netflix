@@ -6,7 +6,6 @@ const cors = require('cors')
 const db = require('./src/db/db')
 const port = process.env.PORT || 1997;
 const routers = require('./src/router/routers');
-const alert = require('alert')
 // const cookiesession = require('cookie-session');
 const passport = require('passport')
 // const session = require('express-session');
