@@ -15,18 +15,16 @@ const MongoStore = require('connect-mongo')(session);
 
 const db = mongoose.connection; // Get the mongoose connection
 
-db.once('open', () => { // Use the 'open' event with 'db.once'
-  routers.use(session({
+routers.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: db }), // Use connect-mongo as session store
     cookie: {
         secure: true,
         maxAge: 60000
-    },
-    store: new MongoStore({ mongooseConnection: db }),
-    secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: true
-  }));
-});
+    }
+}));
 
 
 passport.use(new GoogleStrategy({
