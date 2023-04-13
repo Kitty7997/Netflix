@@ -7,10 +7,10 @@ if (!process.env.MONGODB_URI) {
 }
 
 // Connect to MongoDB using the retrieved URI
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-mongoose.connection.once('open', function () {
-  console.log('Database connected successfully!');
-}).on('error', function (error) {
-  console.log('Error is: ', error);
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => {
+  console.log('MongoDB connected successfully');
+})
+.catch((err) => {
+  console.error('MongoDB connection error:', err);
 });

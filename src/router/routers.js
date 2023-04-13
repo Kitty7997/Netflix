@@ -6,16 +6,27 @@ const bcrypt = require('bcryptjs');
 const Login = require('../models/Login')
 const session = require('express-session');
 const passport = require('passport')
+// const db = require('../db/db')
 const jwt = require('jsonwebtoken');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LocalStrategy = require("passport-local");
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 
+const db = mongoose.connection; // Get the mongoose connection
 
-routers.use(session({
+db.once('open', () => { // Use the 'open' event with 'db.once'
+  routers.use(session({
+    cookie: {
+        secure: true,
+        maxAge: 60000
+    },
+    store: new MongoStore({ mongooseConnection: db }),
     secret: process.env.SECRET_KEY,
     resave: false,
-    saveUninitialized: false
-}));
+    saveUninitialized: true
+  }));
+});
 
 
 passport.use(new GoogleStrategy({
@@ -68,8 +79,8 @@ routers.post('/signup', async (req, res) => {
                     cpassword: cpassword,
                     phone: phone
                 });
-             const token = await UserData.generateAuthToken();
-              res.cookie('netflix', token, {
+                const token = await UserData.generateAuthToken();
+                res.cookie('netflix', token, {
                     expires: new Date(Date.now() + 600000),
                     httpOnly: true
                 })
